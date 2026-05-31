@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+html, body, #root {
+
+    height: auto;
+    overflow: auto;
+
+}
+
+html{
+    overflow-y: scroll;
+}
+
+@theme{
+    --color-red-dark: #880718;
+    --color-red-default: #AE091F;
+    --color-red-light: #E90C2A;
+
+    --color-blue-dark: #1E4971;
+    --color-blue-default: #2B68A1;
+    --color-blue-light: #3E87CC;
+
+
+    --color-grey-dark: #1E1F1F;
+    --color-grey-default: #323434;
+    --color-grey-light: #3C3E3E;
+
+    --color-layout-dark: #141414;
+    --color-layout-default: #141414;
+    --color-layout-light: #E0E0E0;
+
+    --color-bg-dark: #1c384c;
+    --color-bg-default: #141414;
+    --color-bg-light: #3E4751;
+
+
+
+
+
+}
+
+@font-face {
+    font-family: "InterBold";
+    /*noinspection CssUnknownTarget*/
+    src: url("/fonts/Inter-Black.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "InterLight";
+    /*noinspection CssUnknownTarget*/
+    src: url("/fonts/Inter-Light.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    /* Graphite */
+    --color-graphite-100: #090909;
+    --color-graphite-200: #121313; /*Header.bg, Footer.bg, Logo.text, ProfileCard.cardStyle.bg*/
+    --color-graphite-300: #1b1c1c;
+    --color-graphite-400: #242525; /*MainContent.bg, ProfileCard.labelStyle.bg*/
+    --color-graphite-500: #2e2f2f;
+    --color-graphite-600: #575959; /*hover: HeaderButton.bg*/
+    --color-graphite-700: #808383;
+    --color-graphite-800: #abacac; /*ProfileCard.labelStyle.bg*/
+    --color-graphite-900: #d5d6d6;
+    --color-graphite: #2e2f2f; /*HeaderButton.bg*/
+
+    /* Brick Red */
+    --color-brick-red-100: #260207;
+    --color-brick-red-200: #4c040e;
+    --color-brick-red-300: #710614;
+    --color-brick-red-400: #97081b;
+    --color-brick-red-500: #bb0a21;
+    --color-brick-red-600: #f31330;
+    --color-brick-red-700: #f64e64;
+    --color-brick-red-800: #f98998;
+    --color-brick-red-900: #fcc4cb;
+    --color-brick-red: #bb0a21;
+
+    /* Steel Blue */
+    --color-steel-blue-100: #0a1927;
+    --color-steel-blue-200: #15334f;
+    --color-steel-blue-300: #1f4c76;
+    --color-steel-blue-400: #2a669e;
+    --color-steel-blue-500: #347fc4;
+    --color-steel-blue-600: #5b99d3;
+    --color-steel-blue-700: #84b2de;
+    --color-steel-blue-800: #adcce9;
+    --color-steel-blue-900: #d6e5f4;
+    --color-steel-blue: #347fc4;
+
+    /* Parchment */
+    --color-parchment-100: #392a24;
+    --color-parchment-200: #715548;
+    --color-parchment-300: #a58172;
+    --color-parchment-400: #c9b4aa;
+    --color-parchment-500: #ede6e3;
+    --color-parchment-600: #f1ebe9;
+    --color-parchment-700: #f4f0ee;
+    --color-parchment-800: #f8f5f4;
+    --color-parchment-900: #fbfaf9;
+    --color-parchment: #ede6e3;
+
+    /* Alabaster Grey */
+    --color-alabaster-grey-100: #2c2c2b;
+    --color-alabaster-grey-200: #585856;
+    --color-alabaster-grey-300: #838381;
+    --color-alabaster-grey-400: #aeaead; /*Header.border, Footer.border*, ProfileCard.labelStyle.border, ProfileCard.imgStyle.border*/
+    --color-alabaster-grey-500: #dadad9;
+    --color-alabaster-grey-600: #e1e1e0;
+    --color-alabaster-grey-700: #e8e8e8;
+    --color-alabaster-grey-800: #f0f0f0;
+    --color-alabaster-grey-900: #f7f7f7;
+    --color-alabaster-grey: #dadad9;
+
+    --color-glaucous-50: #eef0f6;
+    --color-glaucous-100: #dde1ee;
+    --color-glaucous-200: #bbc2dd;
+    --color-glaucous-300: #99a4cc;
+    --color-glaucous-400: #7786bb;
+    --color-glaucous-500: #5568aa;
+    --color-glaucous-600: #445388;
+    --color-glaucous-700: #333e66;
+    --color-glaucous-800: #222944;
+    --color-glaucous-900: #111522;
+    --color-glaucous-950: #0c0f18;
+
+    --color-rosewood-50: #f7eef1;
+    --color-rosewood-100: #eedde3;
+    --color-rosewood-200: #debac6;
+    --color-rosewood-300: #cd98aa;
+    --color-rosewood-400: #bd758d;
+    --color-rosewood-500: #ac5371;
+    --color-rosewood-600: #8a425a;
+    --color-rosewood-700: #673244;
+    --color-rosewood-800: #45212d;
+    --color-rosewood-900: #221117;
+    --color-rosewood-950: #180c10;
+
+    --color-light-text: #E0E0E0;
+    --color-dark-text: #090909;
+
+    --font-default-bold: "InterBold", Tahoma, Arial, sans-serif, serif;
+    --font-default-light: "InterLight", Tahoma, Arial, sans-serif, serif;
+}

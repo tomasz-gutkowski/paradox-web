@@ -1,0 +1,90 @@
+export type ProfileResponse = {
+    player : ProfileInfo,
+    leagues : LeagueInfo[],
+}
+
+export type ProfileInfo = {
+    puuid: string,
+    gameName : string,
+    tagLine : string,
+    profileIconId : number,
+    summonerLevel : number
+}
+
+export type LeagueInfo = {
+    queueType: string,
+    tier : string,
+    rank : string,
+    leaguePoints : number
+    wins : number,
+    losses : number
+}
+
+export type MatchInfo = {
+    matchId : string,
+    gameResult : string,
+    gameData : {id: number, info : MapAndModeInfo},
+    player : PlayerDisplayInfo,
+    participants : ParticipantDisplayInfo[],
+    gameCreation : number,
+    gameDuration : number
+}
+
+export type MatchDetails = {
+    players : PlayerDisplayInfo[],
+}
+
+export type MapAndModeInfo = {
+    map : string,
+    modeName : string
+}
+
+export type PlayerDisplayInfo = {
+    gameName: string,
+    tagline: string,
+    championName: string,
+    level: number,
+    summonerSpells: IdNamePair[],
+    kills: number,
+    deaths: number,
+    assists: number,
+    totalDamageDealtToChampions: number,
+    items: IdNamePair[],
+    modeData : DefaultModeData | ArenaModeData
+}
+
+export type DefaultModeData = {
+    win : boolean,
+    perks : PerksInfo,
+    creepScore : number,
+    side : string,
+    position : string
+}
+
+export type ArenaModeData = {
+    teamId : number,
+    teamPlacement : number,
+    augments : IdNamePair[],
+}
+
+export type PerksInfo = {
+    keystone : IdNamePair,
+    primaryStyle : IdNamePair,
+    subStyle : IdNamePair,
+}
+
+export type IdNamePair = {
+    id: number,
+    name: string
+}
+
+export type ParticipantDisplayInfo = {
+    puuid : string,
+    gameName : string,
+    tagLine : string,
+    championId : number,
+    position : string,
+    teamId : number
+    placement : number
+}
+
