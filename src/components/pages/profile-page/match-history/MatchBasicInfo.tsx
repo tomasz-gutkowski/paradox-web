@@ -21,7 +21,6 @@ const styles = {
 function MatchBasicInfo({gameResult, teamPlacement, gameData, gameEndTimestamp, gameDuration} : props) {
     let modeName;
     if (gameData.info !== null) modeName = gameData.info.modeName;
-    else if ("id" in gameData && gameData.id === 3130) modeName = "Custom";
     else modeName = "Unknown";
 
     const gameTimeMins = Math.floor(gameDuration / 60);
