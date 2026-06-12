@@ -2,7 +2,8 @@ type Props = {
     gameName : string,
     tagLine : string,
     profileIconId : number,
-    summonerLevel : number
+    summonerLevel : number,
+    version : string,
 }
 const styles = {
     cardStyle: "mb-10 bg-graphite-200 w-100 h-60 p-5 width-10 rounded-xl border-3 border-solid border-alabaster-grey-400 flex flex-col items-center justify-center",
@@ -11,8 +12,8 @@ const styles = {
     h4Style: "cursor-pointer text-light-tex font-default-bold",
 }
 
-function ProfileCard({gameName, tagLine, profileIconId, summonerLevel} : Props) {
-    const profileIconUrl = `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/profileicon/${profileIconId}.png`;
+function ProfileCard({gameName, tagLine, profileIconId, summonerLevel, version} : Props) {
+    const profileIconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${profileIconId}.png`;
     const riotId = `${gameName}#${tagLine}`;
 
     const copyToClipboard = (text: string) => {

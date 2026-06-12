@@ -1,6 +1,7 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import DefaultPage from "./components/pages/DefaultPage.tsx";
-import ProfilePage, {profileLoader} from "./components/pages/profile-page/ProfilePage.tsx";
+import ProfilePage from "./components/pages/profile-page/ProfilePage.tsx";
+import {profileLoader} from "./components/pages/profile-page/ProfilePage.loader.ts";
 import PageNotFound from "./components/pages/PageNotFound.tsx";
 import ScaledPage from "./components/pages/ScaledPage.tsx"
 

@@ -1,25 +1,52 @@
 import type {MatchInfo} from "../types/ProfileTypes.ts";
+import MatchBasicInfo from "./MatchBasicInfo.tsx";
+import MatchPlayerInfo from "./player-info/MatchPlayerInfo.tsx";
 
 const styles = {
-    win:"bg-glaucous-600 hover:bg-glaucous-700 w-200 h-40 border-y-0 border-x-10 border-solid border-steel-blue mt-8",
-    loss: "bg-rosewood-600 hover:bg-rosewood-700 w-200 h-40 border-y-0 border-x-10 border-solid border-brick-red-700 mt-8",
-    remake: "bg-graphite-700 hover:bg-graphite-600 w-200 h-40 border-y-0 border-x-10 border-solid border-graphite-800 mt-8",
-    error: "bg-graphite-900 hover:bg-graphite-900 w-200 h-40 border-y-0 border-x-10 border-solid border-graphite-100 mt-8"
+    win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
+    loss: "bg-rosewood-600 hover:bg-rosewood-700 border-brick-red-700 text-brick-red-800",
+    remake: "bg-graphite-700 hover:bg-graphite-600 border-graphite-800 text-graphite-900",
+    error: "bg-graphite-100 border-graphite-100 text-graphite-100",
+    shared: "w-200 h-40 border-y-0 border-x-10 border-solid font-default-bold p-2 mt-8 flex flex-row"
 };
 
-function MatchCard({matchData} : {matchData : MatchInfo}){
+function MatchCard({matchData, version} : {matchData : MatchInfo, version: string}){
     let style : string;
 
     switch(matchData.gameResult){
         case "WIN":{ style = styles.win; break;}
-        case "LOSE":{ style = styles.loss; break;}
+        case "LOSS":{ style = styles.loss; break;}
         case "REMAKE":{ style = styles.remake; break;}
         default: {style = styles.error; break;}
     }
 
+    style = style + " " + styles.shared;
+
+    let gameResult;
+    let teamPlacement;
+
+    if("win" in matchData.player.modeData) gameResult = matchData.gameResult;
+    else if("teamPlacement" in  matchData.player.modeData) teamPlacement = matchData.player.modeData.teamPlacement;
+
 
     return(
         <div className={style}>
+            <MatchBasicInfo gameResult={gameResult}
+                            teamPlacement={teamPlacement}
+                            gameData={matchData.gameData}
+                            gameEndTimestamp={matchData.gameEndTimestamp}
+                            gameDuration={matchData.gameDuration}
+            />
+            <MatchPlayerInfo championName={matchData.player.championName}
+                             level={matchData.player.level}
+                             summonerSpells={matchData.player.summonerSpells}
+                             kills={matchData.player.kills}
+                             deaths={matchData.player.deaths}
+                             assists={matchData.player.assists}
+                             items={matchData.player.items}
+                             modeData={matchData.player.modeData}
+                             version={version}/>
+
 
         </div>
     );
