@@ -42,7 +42,7 @@ export type MapAndModeInfo = {
 export type PlayerDisplayInfo = {
     gameName: string,
     tagline: string,
-    championName: string,
+    championData: ChampionData,
     level: number,
     summonerSpells: IdNameImage[],
     kills: number,
@@ -87,9 +87,14 @@ export type ParticipantDisplayInfo = {
     puuid : string,
     gameName : string,
     tagLine : string,
-    championId : number,
+    championData : ChampionData,
     position : string,
     teamId : number
     placement : number
+}
+
+export type ChampionData = {
+    key: string,
+    idName: {id: string, name: string},
 }
 

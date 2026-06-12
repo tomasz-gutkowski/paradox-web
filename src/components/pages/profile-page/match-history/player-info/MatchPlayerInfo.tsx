@@ -1,9 +1,10 @@
-import type {ArenaModeData, DefaultModeData, IdNameImage, IdNamePair} from "../../types/ProfileTypes.ts";
+import type {ArenaModeData, ChampionData, DefaultModeData, IdNameImage, IdNamePair} from "../../types/ProfileTypes.ts";
 import MatchPlayerInventory from "./MatchPlayerInventory.tsx";
 import DefaultModeScoreboard from "./DefaultModeScoreboard.tsx";
+import ArenaModeScoreboard from "./ArenaModeScoreboard.tsx";
 
 type props = {
-    championName: string,
+    championData: ChampionData,
     level: number,
     summonerSpells: IdNameImage[],
     kills: number,
@@ -11,30 +12,36 @@ type props = {
     assists: number,
     items: IdNamePair[],
     modeData: DefaultModeData | ArenaModeData
+    gameDuration: number,
     version : string,
 }
 
 const styles = {
-    component: "py-2 px-5 justify-start items-start flex-col",
+    component: "py-2 pl-5 justify-start items-start flex-col border-r-1 w-43/100",
     topContainer: "w-19 h-19",
     iconContainer: "overflow-hidden rounded-full border-3",
     championIcon: "relative z-0 object-cover scale-112" ,
     level: "relative z-1 w-6 bg-black rounded-full -my-5 -mx-1 flex items-center justify-center",
 }
 
-function MatchPlayerInfo({championName, level, summonerSpells, kills, deaths, assists, items, modeData, version} : props){
-    const championIcon = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`
+function MatchPlayerInfo({championData, level, summonerSpells, kills, deaths, assists, items, modeData, gameDuration, version} : props){
+    const championIcon = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championData.idName.id}.png`
 
     const defaultSb = <DefaultModeScoreboard summonerSpells={summonerSpells}
                                              kills={kills}
                                              deaths={deaths}
                                              assists={assists}
-        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-        // @ts-expect-error
-                                             modeData={modeData}
+                                             modeData={modeData as DefaultModeData}
+                                             gameDuration={gameDuration}
                                              version={version}>
     </DefaultModeScoreboard>
-    const arenaSb = <div></div>;
+    const arenaSb = <ArenaModeScoreboard kills={kills}
+                                         deaths={deaths}
+                                         assists={assists}
+                                         modeData={modeData as ArenaModeData}
+                                         version={version}>
+    </ArenaModeScoreboard>;
+
     const displayType = "teamPlacement" in modeData ? arenaSb : defaultSb;
 
     const inventorySize = displayType === arenaSb ? 7 : 8;
@@ -47,7 +54,7 @@ function MatchPlayerInfo({championName, level, summonerSpells, kills, deaths, as
             <div className={"flex-row flex"}>
                 <div className={styles.topContainer}>
                     <div className={styles.iconContainer}>
-                        <img className={styles.championIcon} src={championIcon} alt={championName}></img>
+                        <img className={styles.championIcon} src={championIcon} alt={championData.idName.id}></img>
                     </div>
 
                 </div>

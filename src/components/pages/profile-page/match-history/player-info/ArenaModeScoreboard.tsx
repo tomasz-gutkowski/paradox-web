@@ -9,7 +9,7 @@ type props = {
 }
 
 function ArenaModeScoreboard({kills, deaths, assists, modeData, version}: props) {
-    return(<div></div>)
+    return(<div>not yet</div>)
 }
 
 export default ArenaModeScoreboard;

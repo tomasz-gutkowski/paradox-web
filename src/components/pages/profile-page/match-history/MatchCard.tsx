@@ -1,6 +1,7 @@
 import type {MatchInfo} from "../types/ProfileTypes.ts";
 import MatchBasicInfo from "./MatchBasicInfo.tsx";
 import MatchPlayerInfo from "./player-info/MatchPlayerInfo.tsx";
+import MatchPlayersListDefault from "./MatchPlayersListDefault.tsx";
 
 const styles = {
     win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
@@ -28,7 +29,13 @@ function MatchCard({matchData, version} : {matchData : MatchInfo, version: strin
     if("win" in matchData.player.modeData) gameResult = matchData.gameResult;
     else if("teamPlacement" in  matchData.player.modeData) teamPlacement = matchData.player.modeData.teamPlacement;
 
+    const defaultPlayerList = <MatchPlayersListDefault ownerName={matchData.player.gameName}
+                                              ownerTag={matchData.player.tagline}
+                                              participants={matchData.participants}
+                                              version={version}/>
+    const arenaPlayerList = <div></div>
 
+    const playerList = gameResult === undefined ? arenaPlayerList : defaultPlayerList;
     return(
         <div className={style}>
             <MatchBasicInfo gameResult={gameResult}
@@ -37,7 +44,7 @@ function MatchCard({matchData, version} : {matchData : MatchInfo, version: strin
                             gameEndTimestamp={matchData.gameEndTimestamp}
                             gameDuration={matchData.gameDuration}
             />
-            <MatchPlayerInfo championName={matchData.player.championName}
+            <MatchPlayerInfo championData={matchData.player.championData}
                              level={matchData.player.level}
                              summonerSpells={matchData.player.summonerSpells}
                              kills={matchData.player.kills}
@@ -45,9 +52,9 @@ function MatchCard({matchData, version} : {matchData : MatchInfo, version: strin
                              assists={matchData.player.assists}
                              items={matchData.player.items}
                              modeData={matchData.player.modeData}
+                             gameDuration={matchData.gameDuration}
                              version={version}/>
-
-
+            {playerList}
         </div>
     );
 }
