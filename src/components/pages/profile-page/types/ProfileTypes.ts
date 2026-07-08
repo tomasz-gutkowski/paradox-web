@@ -23,20 +23,21 @@ export type LeagueInfo = {
 export type MatchInfo = {
     matchId : string,
     gameResult : string,
-    gameData : {id: number, info : MapAndModeInfo},
+    gameData : GameModeData,
     player : PlayerDisplayInfo,
     participants : ParticipantDisplayInfo[],
     gameEndTimestamp : number,
     gameDuration : number
 }
 
-export type MatchDetails = {
-    players : PlayerDisplayInfo[],
+export type GameModeData = {
+    id: number,
+    map : string,
+    modeName : string,
 }
 
-export type MapAndModeInfo = {
-    map : string,
-    modeName : string
+export type MatchDetails = {
+    players : PlayerDisplayInfo[],
 }
 
 export type PlayerDisplayInfo = {
@@ -44,7 +45,7 @@ export type PlayerDisplayInfo = {
     tagline: string,
     championData: ChampionData,
     level: number,
-    summonerSpells: IdNameImage[],
+    summonerSpells: IdNameImageData[],
     kills: number,
     deaths: number,
     assists: number,
@@ -64,18 +65,19 @@ export type DefaultModeData = {
 export type ArenaModeData = {
     teamId : number,
     teamPlacement : number,
-    augments : IdNamePair[],
+    augments : AugmentData[],
 }
 
 export type PerksInfo = {
-    keystone : IdNameImage,
-    primaryStyle : IdNameImage,
-    subStyle : IdNameImage,
+    keystone : IdNameImageData,
+    primaryStyle : IdNameImageData,
+    subStyle : IdNameImageData,
 }
 
-export type IdNameImage = {
+export type IdNameImageData = {
     id: number,
-    nameImage: {name: string, image: string}
+    name: string,
+    image: string
 }
 
 export type IdNamePair = {
@@ -95,6 +97,14 @@ export type ParticipantDisplayInfo = {
 
 export type ChampionData = {
     key: string,
-    idName: {id: string, name: string},
+    id: string,
+    name: string
+}
+
+export type AugmentData = {
+    id : number,
+    name : string,
+    iconLarge : string,
+    iconSmall : string,
 }
 

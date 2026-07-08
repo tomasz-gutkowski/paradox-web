@@ -1,9 +1,9 @@
-import type {MapAndModeInfo} from "../types/ProfileTypes.ts";
+import type {GameModeData} from "../types/ProfileTypes.ts";
 
 type props = {
     gameResult?: string,
     teamPlacement?: number,
-    gameData: {id: number, info: MapAndModeInfo},
+    gameData: GameModeData,
     gameEndTimestamp: number,
     gameDuration: number,
 }
@@ -20,7 +20,7 @@ const styles = {
 
 function MatchBasicInfo({gameResult, teamPlacement, gameData, gameEndTimestamp, gameDuration} : props) {
     let modeName;
-    if (gameData.info !== null) modeName = gameData.info.modeName;
+    if (gameData !== null) modeName = gameData.modeName;
     else modeName = "Unknown";
 
     const gameTimeMins = Math.floor(gameDuration / 60);

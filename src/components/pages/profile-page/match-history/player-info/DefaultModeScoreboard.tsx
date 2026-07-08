@@ -1,7 +1,7 @@
-import type {DefaultModeData, IdNameImage} from "../../types/ProfileTypes.ts";
+import type {DefaultModeData, IdNameImageData} from "../../types/ProfileTypes.ts";
 
 type props = {
-    summonerSpells: IdNameImage[],
+    summonerSpells: IdNameImageData[],
     kills: number,
     deaths: number,
     assists: number,
@@ -14,7 +14,7 @@ const styles = {
     component:  "my ml-3 flex flex-row items-start justify-center",
     iconSquare: "border-2 flex",
     summonerSpells: "border-r-2",
-    icon: "w-8 h-8 bg-black",
+    icon: "w-8 h-8 bg-graphite-200",
     stats: "px-3 border-l-2 mx-4 my-0 py-0 font-default-light font-bold flex items-center justify-center flex-col",
     kda: "text-xl text-graphite-900 px-1 py-0 flex flex-row tracking-widest",
     kdaRatio: "text-xs text-graphite-900",
@@ -22,7 +22,7 @@ const styles = {
 }
 function DefaultModeScoreboard({summonerSpells, kills, deaths, assists, modeData, gameDuration, version} : props){
     let sumSpellKey = 0;
-    const summonerSpellsDisplay = summonerSpells.map(s => <img key={(sumSpellKey++)+"-"+s.id} className={styles.icon} src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${s.nameImage.image}`} alt={s.nameImage.name}></img>)
+    const summonerSpellsDisplay = summonerSpells.map(s => <img key={(sumSpellKey++)+"-"+s.id} className={styles.icon} src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${s.image}`} alt={s.name}></img>)
 
     const perksIconUrl = `https://ddragon.leagueoflegends.com/cdn/img/`
 
@@ -40,8 +40,8 @@ function DefaultModeScoreboard({summonerSpells, kills, deaths, assists, modeData
                 {summonerSpellsDisplay}
             </div>
             <div>
-                <img className={styles.icon} src={perksIconUrl+modeData.perks.keystone.nameImage.image} alt={modeData.perks.keystone.nameImage.name}></img>
-                <img className={styles.icon} src={perksIconUrl+modeData.perks.subStyle.nameImage.image} alt={modeData.perks.subStyle.nameImage.name}></img>
+                <img className={styles.icon} src={perksIconUrl+modeData.perks.keystone.image} alt={modeData.perks.keystone.name}></img>
+                <img className={styles.icon+" border-3 border-graphite-200"} src={perksIconUrl+modeData.perks.subStyle.image} alt={modeData.perks.subStyle.name}></img>
             </div>
         </div>
         <div className={styles.stats}>

@@ -35,7 +35,7 @@ function MatchPlayersListDefault({ownerName, ownerTag, participants, version} : 
         const topBorder = flag ? "border-t-1" : "";
         flag = true;
         return  (<div key={p.puuid} className={styles.playerCell+" "+topBorder}>
-            <img className={styles.championIcon} src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${p.championData.idName.id}.png`} alt={p.championData.idName.id}></img>
+            <img className={styles.championIcon} src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${p.championData.id}.png`} alt={p.championData.id}></img>
             <span className={styles.playerName+" "+ownerStyle}>{p.gameName}</span>
         </div>)}
 

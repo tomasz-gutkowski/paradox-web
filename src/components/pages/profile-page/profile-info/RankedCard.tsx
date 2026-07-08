@@ -19,9 +19,9 @@ const styles = {
 }
 
 function RankedCard({queueType, tier, rank, leaguePoints, wins, losses}: Props) {
-    const queueName = queueType === "RANKED_SOLO_5x5" ? "RANKED SOLO/DUO" : (queueType === "RANKED_FLEX_SR" ? "RANKED FLEX" : undefined);
-    const tierIconPath = "/src/assets/tier-icons/" + tier.toLowerCase() + ".png"
-    const fullRankName = tier + " " +(tier === "UNRANKED" || tier === "MASTER" || tier ==="GRANDMASTER" || tier === "CHALLENGER" ? "" : rank)
+    const queueName = getQueueDisplayName(queueType);
+    const tierIconPath = "/src/assets/tier-icons/" + tier.toLowerCase() + ".png";
+    const fullRankName = tier + " " +(tier === "UNRANKED" || tier === "MASTER" || tier ==="GRANDMASTER" || tier === "CHALLENGER" ? "" : rank);
     const winRatio = ((wins / (wins+losses)*100).toFixed(0)).toString() + "%WR";
     return (
         <div className={styles.cardStyle}>
@@ -37,5 +37,18 @@ function RankedCard({queueType, tier, rank, leaguePoints, wins, losses}: Props) 
         </div>
     )
 
+}
+
+function getQueueDisplayName(queueType: string) : string {
+    switch (queueType) {
+        case "RANKED_SOLO_5x5":
+            return "RANKED SOLO/DUO"
+        case "RANKED_FLEX_SR":
+            return "RANKED FLEX"
+        case "RANKED_PREMADE_5x5":
+            return "RANKED FIVES"
+        default:
+            return queueType
+    }
 }
 export default RankedCard;
