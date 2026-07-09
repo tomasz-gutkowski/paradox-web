@@ -9,10 +9,10 @@ type props = {
 
 const styles = {
     component : "my ml-3 flex flex-row items-start justify-center",
-    augmentBox : "grid grid-cols-3 gap-1 border-solid border-3 bg-graphite-500",
+    augmentBox : "grid grid-cols-3 border-solid border-3",
     augmentIcon : "h-8 w-8 bg-graphite-200",
-    stats: "pl-2 py-1 border-l-2 mx-4 my-3 py-0 font-default-light font-bold flex items-center justify-center flex-col",
-    kda : "text-xl text-graphite-900 px-1 py-0 flex flex-row tracking-widest border-b-1",
+    stats: "pl-2 py-1 border-l-2 ml-3 mr-1 my-3 py-0 font-default-light font-bold flex items-center justify-center flex-col",
+    kda : "text-base text-graphite-900 px-1 py-0 flex flex-row tracking-widest border-b-1",
     kdaRatio: "mt-1 text-xs text-graphite-900",
 }
 function ArenaModeScoreboard({kills, deaths, assists, modeData}: props) {

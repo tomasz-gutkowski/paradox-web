@@ -6,10 +6,12 @@ import {useLoaderData} from "react-router-dom";
 
 function ProfilePage(){
 
-    const {profileRes , matchesRes, versionRes} = useLoaderData();
+    const {profileRes , matchesRes, versionRes, server, anchor} = useLoaderData();
     const profileData = profileRes as ProfileResponse;
     const matchData = matchesRes as MatchInfo[];
     const version = versionRes as string;
+    const serverTag = server as string;
+    const anchorTime = anchor as number;
 
     return(
         <>
@@ -18,7 +20,7 @@ function ProfilePage(){
                     <ProfileInfo profileData={profileData} version={version} />
                 </div>
                 <div className="flex-1 min-h-dvh">
-                    <MatchHistory matchData={matchData} version={version}/>
+                    <MatchHistory matchData={matchData} version={version} puuid={profileData.player.puuid} serverTag={serverTag} anchorTime={anchorTime}/>
                 </div>
             </PageBlueprint>
         </>
