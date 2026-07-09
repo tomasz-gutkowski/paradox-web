@@ -38,8 +38,7 @@ function MatchPlayerInfo({championData, level, summonerSpells, kills, deaths, as
     const arenaSb = <ArenaModeScoreboard kills={kills}
                                          deaths={deaths}
                                          assists={assists}
-                                         modeData={modeData as ArenaModeData}
-                                         version={version}>
+                                         modeData={modeData as ArenaModeData}>
     </ArenaModeScoreboard>;
 
     const displayType = "teamPlacement" in modeData ? arenaSb : defaultSb;

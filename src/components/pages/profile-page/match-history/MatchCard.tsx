@@ -2,6 +2,7 @@ import type {MatchInfo} from "../types/ProfileTypes.ts";
 import MatchBasicInfo from "./MatchBasicInfo.tsx";
 import MatchPlayerInfo from "./player-info/MatchPlayerInfo.tsx";
 import MatchPlayersListDefault from "./MatchPlayersListDefault.tsx";
+import MatchPlayersListArena from "./player-info/MatchPlayersListArena.tsx";
 
 const styles = {
     win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
@@ -33,8 +34,10 @@ function MatchCard({matchData, version} : {matchData : MatchInfo, version: strin
                                               ownerTag={matchData.player.tagline}
                                               participants={matchData.participants}
                                               version={version}/>
-    const arenaPlayerList = <div></div>
-
+    const arenaPlayerList = <MatchPlayersListArena ownerName={matchData.player.gameName}
+                                                     ownerTag={matchData.player.tagline}
+                                                     participants={matchData.participants}
+                                                     version={version}/>
     const playerList = gameResult === undefined ? arenaPlayerList : defaultPlayerList;
     return(
         <div className={style}>
