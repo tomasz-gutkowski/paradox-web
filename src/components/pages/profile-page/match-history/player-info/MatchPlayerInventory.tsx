@@ -1,4 +1,5 @@
 import type {IdNamePair} from "../../types/ProfileTypes.ts";
+import {getItemIconUrl} from "../../../constants.ts";
 
 const styles = {
     items: "my-8 flex items-start justify-start",
@@ -9,7 +10,7 @@ function MatchPlayerInventory({items, version, size} : {items : IdNamePair[], ve
     let itemAmount = size;
     const itemsComponent = items.map(i => {
         if(itemAmount-- <= 0) return;
-        if(i.id > 0) return<div key={itemAmount+"_"+i.id} className={styles.itemCell}><img src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${i.id}.png`}></img></div>;
+        if(i.id > 0) return<div key={itemAmount+"_"+i.id} className={styles.itemCell}><img src={getItemIconUrl(version, i.id)}></img></div>;
         else return <div key={itemAmount+"_"+i.id} className={styles.itemCell+" "+styles.emptyItemSlot}></div>;
     });
 

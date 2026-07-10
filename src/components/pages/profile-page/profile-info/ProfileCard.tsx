@@ -1,3 +1,5 @@
+import {getProfileIconUrl} from "../../constants.ts";
+
 type Props = {
     gameName : string,
     tagLine : string,
@@ -13,7 +15,7 @@ const styles = {
 }
 
 function ProfileCard({gameName, tagLine, profileIconId, summonerLevel, version} : Props) {
-    const profileIconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${profileIconId}.png`;
+    const profileIconUrl = getProfileIconUrl(version, profileIconId);
     const riotId = `${gameName}#${tagLine}`;
 
     const copyToClipboard = (text: string) => {

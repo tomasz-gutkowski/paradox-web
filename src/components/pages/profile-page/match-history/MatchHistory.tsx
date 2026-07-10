@@ -1,6 +1,7 @@
 import MatchCard from './MatchCard'
 import type {MatchInfo} from '../types/ProfileTypes.ts'
 import {useState} from "react";
+import {fetchMatchListUrl} from "../../constants.ts";
 
 
 type props = {
@@ -25,7 +26,7 @@ function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props
 
     async function loadMoreMatches() {
         setLoading(true)
-        const matchesRes : MatchInfo[] = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/matches/${serverTag}/${puuid}/${anchorTime}?start=${start}`).then((res) => res.json());
+        const matchesRes : MatchInfo[] = await fetch(fetchMatchListUrl(serverTag, puuid, anchorTime)+"?start="+start).then((res) => res.json());
         setMatches([...matches, ...matchesRes]);
         setStart(start + matchesRes.length);
         setLoading(false)

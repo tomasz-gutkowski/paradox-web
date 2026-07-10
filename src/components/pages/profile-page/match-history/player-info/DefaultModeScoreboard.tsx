@@ -1,4 +1,5 @@
 import type {DefaultModeData, IdNameImageData} from "../../types/ProfileTypes.ts";
+import {getPerkIconUrl, getSummonerSpellIconUrl} from "../../../constants.ts";
 
 type props = {
     summonerSpells: IdNameImageData[],
@@ -21,15 +22,13 @@ const styles = {
     creepScore: "text-xs text-graphite-900 pt-1 border-t",
 }
 function DefaultModeScoreboard({summonerSpells, kills, deaths, assists, modeData, gameDuration, version} : props){
-    let sumSpellKey = 0;
-    const summonerSpellsDisplay = summonerSpells.map(s => <img key={(sumSpellKey++)+"-"+s.id} className={styles.icon} src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${s.image}`} alt={s.name}></img>)
 
-    const perksIconUrl = `https://ddragon.leagueoflegends.com/cdn/img/`
+    const summonerSpellsDisplay = summonerSpells.map((s, index) =>
+        <img key={index+"-"+s.id} className={styles.icon} src={getSummonerSpellIconUrl(version, s.image)} alt={s.name}></img>)
 
     const kda = <div className={styles.kda}>{kills+"/"}<div className={"text-red-500"}>{deaths}</div>{"/"+assists}</div>
     const kdaRatio = deaths === 0 ? kills+assists : (kills+assists)/deaths;
     const kdaRatioDisplay = <div>{(kdaRatio).toFixed(2)+"KDA"}</div>;
-
 
     const creepScorePerMin = (modeData.creepScore*60/gameDuration).toFixed(1)
     const creepScoreDisplay = <div>{modeData.creepScore+"CS ("+creepScorePerMin+"/m)"}</div>;
@@ -40,8 +39,8 @@ function DefaultModeScoreboard({summonerSpells, kills, deaths, assists, modeData
                 {summonerSpellsDisplay}
             </div>
             <div>
-                <img className={styles.icon} src={perksIconUrl+modeData.perks.keystone.image} alt={modeData.perks.keystone.name}></img>
-                <img className={styles.icon+" border-3 border-graphite-200"} src={perksIconUrl+modeData.perks.subStyle.image} alt={modeData.perks.subStyle.name}></img>
+                <img className={styles.icon} src={getPerkIconUrl(modeData.perks.keystone.image)} alt={modeData.perks.keystone.name}></img>
+                <img className={styles.icon+" border-3 border-graphite-200"} src={getPerkIconUrl(modeData.perks.subStyle.image)} alt={modeData.perks.subStyle.name}></img>
             </div>
         </div>
         <div className={styles.stats}>

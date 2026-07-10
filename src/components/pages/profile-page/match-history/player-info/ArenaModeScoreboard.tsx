@@ -1,4 +1,5 @@
 import type {ArenaModeData} from "../../types/ProfileTypes.ts";
+import {getAugmentIconUrl} from "../../../constants.ts";
 
 type props = {
     kills: number,
@@ -16,11 +17,10 @@ const styles = {
     kdaRatio: "mt-1 text-xs text-graphite-900",
 }
 function ArenaModeScoreboard({kills, deaths, assists, modeData}: props) {
-    const augmentIconUrl = 'https://raw.communitydragon.org/latest/game/'
 
     const augmentsDisplay = modeData.augments.map((a, index) => {
             if(a.id > 0){
-                return (<div key={index+"_"+a.id} className={styles.augmentIcon}><img src={augmentIconUrl+a.iconSmall} alt={a.id.toString()}></img></div>)
+                return (<div key={index+"_"+a.id} className={styles.augmentIcon}><img src={getAugmentIconUrl(a.iconSmall)} alt={a.id.toString()}></img></div>)
             }
             else{
                 return (<div key={"empty_"+index} className={styles.augmentIcon}></div>)

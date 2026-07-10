@@ -1,9 +1,10 @@
 import type {MatchDetails, MatchInfo} from "../types/ProfileTypes.ts";
 import MatchBasicInfo from "./MatchBasicInfo.tsx";
 import MatchPlayerInfo from "./player-info/MatchPlayerInfo.tsx";
-import MatchPlayersListDefault from "./MatchPlayersListDefault.tsx";
+import MatchPlayersListDefault from "./player-info/MatchPlayersListDefault.tsx";
 import MatchPlayersListArena from "./player-info/MatchPlayersListArena.tsx";
 import {useState} from "react";
+import {fetchMatchDetailsUrl} from "../../constants.ts";
 
 const styles = {
     win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
@@ -51,7 +52,7 @@ function MatchCard({serverTag, matchData, version} : {serverTag : string, matchD
         setExpanded(!expanded);
         if(!expanded && matchDetails === undefined) {
             setLoading(true);
-            const matchDetailsRes: MatchDetails = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/match/${serverTag}/${matchData.matchId}`).then((res) => res.json());
+            const matchDetailsRes: MatchDetails = await fetch(fetchMatchDetailsUrl(serverTag, matchData.matchId)).then((res) => res.json());
             setMatchDetails(matchDetailsRes);
             setLoading(false);
         }

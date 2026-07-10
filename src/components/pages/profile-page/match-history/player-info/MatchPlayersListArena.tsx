@@ -1,4 +1,5 @@
 import type {ParticipantDisplayInfo} from "../../types/ProfileTypes.ts";
+import {getChampionIconUrl} from "../../../constants.ts";
 
 type props = {
     ownerName: string,
@@ -34,7 +35,7 @@ function MatchPlayersListArena({ownerName, ownerTag, participants, version} : pr
             <div key={p.puuid} className={styles.playerCell+topBorder}>
 
                 <img className={styles.championIcon}
-                     src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${p.championData.id}.png`}
+                     src={getChampionIconUrl(version, p.championData.id)}
                      alt={p.championData.id}>
                 </img>
                 <span className={styles.playerName + " " + ownerStyle}>{p.gameName}</span>

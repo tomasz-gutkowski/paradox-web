@@ -2,6 +2,7 @@ import type {ArenaModeData, ChampionData, DefaultModeData, IdNameImageData, IdNa
 import MatchPlayerInventory from "./MatchPlayerInventory.tsx";
 import DefaultModeScoreboard from "./DefaultModeScoreboard.tsx";
 import ArenaModeScoreboard from "./ArenaModeScoreboard.tsx";
+import {getChampionIconUrl} from "../../../constants.ts";
 
 type props = {
     championData: ChampionData,
@@ -25,7 +26,6 @@ const styles = {
 }
 
 function MatchPlayerInfo({championData, level, summonerSpells, kills, deaths, assists, items, modeData, gameDuration, version} : props){
-    const championIcon = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championData.id}.png`
 
     const defaultSb = <DefaultModeScoreboard summonerSpells={summonerSpells}
                                              kills={kills}
@@ -53,7 +53,7 @@ function MatchPlayerInfo({championData, level, summonerSpells, kills, deaths, as
             <div className={"flex-row flex"}>
                 <div className={styles.topContainer}>
                     <div className={styles.iconContainer}>
-                        <img className={styles.championIcon} src={championIcon} alt={championData.id}></img>
+                        <img className={styles.championIcon} src={getChampionIconUrl(version, championData.id)} alt={championData.id}></img>
                     </div>
 
                 </div>
