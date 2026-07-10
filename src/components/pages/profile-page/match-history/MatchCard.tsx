@@ -1,8 +1,9 @@
-import type {MatchInfo} from "../types/ProfileTypes.ts";
+import type {MatchDetails, MatchInfo} from "../types/ProfileTypes.ts";
 import MatchBasicInfo from "./MatchBasicInfo.tsx";
 import MatchPlayerInfo from "./player-info/MatchPlayerInfo.tsx";
 import MatchPlayersListDefault from "./MatchPlayersListDefault.tsx";
 import MatchPlayersListArena from "./player-info/MatchPlayersListArena.tsx";
+import {useState} from "react";
 
 const styles = {
     win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
@@ -12,7 +13,11 @@ const styles = {
     shared: "w-200 h-40 border-y-0 border-x-10 border-solid font-default-bold p-2 mt-8 flex flex-row"
 };
 
-function MatchCard({matchData, version} : {matchData : MatchInfo, version: string}){
+function MatchCard({serverTag, matchData, version} : {serverTag : string, matchData : MatchInfo, version: string}){
+    const [expanded, setExpanded] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [matchDetails, setMatchDetails] = useState<MatchDetails>();
+
     let style : string;
 
     switch(matchData.gameResult){
@@ -39,8 +44,22 @@ function MatchCard({matchData, version} : {matchData : MatchInfo, version: strin
                                                      participants={matchData.participants}
                                                      version={version}/>
     const playerList = gameResult === undefined ? arenaPlayerList : defaultPlayerList;
+
+    const expandedDisplay = expanded ? <div className={"width-200 h-4 bg-green-500"}>{loading ? "LOADING..." : "LOADED"}</div> : <div className={"width-200 h-2 bg-red-500"}></div>
+
+    async function expandDetails(){
+        setExpanded(!expanded);
+        if(!expanded && matchDetails === undefined) {
+            setLoading(true);
+            const matchDetailsRes: MatchDetails = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/match/${serverTag}/${matchData.matchId}`).then((res) => res.json());
+            setMatchDetails(matchDetailsRes);
+            setLoading(false);
+        }
+    }
+
     return(
-        <div className={style}>
+        <div>
+        <div className={style} onClick={() => expandDetails()}>
             <MatchBasicInfo gameResult={gameResult}
                             teamPlacement={teamPlacement}
                             gameData={matchData.gameData}
@@ -58,6 +77,8 @@ function MatchCard({matchData, version} : {matchData : MatchInfo, version: strin
                              gameDuration={matchData.gameDuration}
                              version={version}/>
             {playerList}
+        </div>
+            {expandedDisplay}
         </div>
     );
 }
