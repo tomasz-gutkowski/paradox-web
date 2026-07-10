@@ -1,6 +1,6 @@
-import type {MatchInfo, ProfileResponse} from "./types/ProfileTypes.ts";
+import type {MatchInfo, ProfileResponse} from "./utilities/ProfileTypes.ts";
 import {type LoaderFunctionArgs} from 'react-router-dom';
-import {fetchDataDragonLatestUrl, fetchMatchListUrl, fetchProfileUrl} from "../constants.ts";
+import {fetchDataDragonLatestUrl, fetchMatchListUrl, fetchProfileUrl} from "./utilities/constants.ts";
 
 export async function profileLoader({params}: LoaderFunctionArgs) {
     const {server, gameName, tagLine} = params;

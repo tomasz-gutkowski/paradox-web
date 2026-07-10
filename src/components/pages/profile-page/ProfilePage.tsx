@@ -1,7 +1,7 @@
 import PageBlueprint from "../PageBlueprint.tsx";
 import ProfileInfo from "./profile-info/ProfileInfo.tsx";
 import MatchHistory from "./match-history/MatchHistory.tsx"
-import type {MatchInfo, ProfileResponse} from "./types/ProfileTypes.ts";
+import type {MatchInfo, ProfileResponse} from "./utilities/ProfileTypes.ts";
 import {useLoaderData} from "react-router-dom";
 
 function ProfilePage(){

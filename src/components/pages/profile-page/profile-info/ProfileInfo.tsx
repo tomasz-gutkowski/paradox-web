@@ -1,6 +1,6 @@
 import ProfileCard from './ProfileCard'
 import RankedCard from './RankedCard'
-import type {ProfileResponse} from "../types/ProfileTypes.ts";
+import type {ProfileResponse} from "../utilities/ProfileTypes.ts";
 
 
 

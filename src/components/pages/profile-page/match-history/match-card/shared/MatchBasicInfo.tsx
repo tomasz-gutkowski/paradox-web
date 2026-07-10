@@ -1,4 +1,4 @@
-import type {GameModeData} from "../types/ProfileTypes.ts";
+import type {GameModeData} from "../../../utilities/ProfileTypes.ts";
 
 type props = {
     gameResult?: string,

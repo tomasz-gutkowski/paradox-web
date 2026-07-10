@@ -1,4 +1,4 @@
-import {getProfileIconUrl} from "../../constants.ts";
+import {getProfileIconUrl} from "../utilities/constants.ts";
 
 type Props = {
     gameName : string,

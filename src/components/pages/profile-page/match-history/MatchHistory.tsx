@@ -1,7 +1,7 @@
-import MatchCard from './MatchCard'
-import type {MatchInfo} from '../types/ProfileTypes.ts'
+import MatchCard from './match-card/MatchCard.tsx'
+import type {MatchInfo} from '../utilities/ProfileTypes.ts'
 import {useState} from "react";
-import {fetchMatchListUrl} from "../../constants.ts";
+import {fetchMatchListUrl} from "../utilities/constants.ts";
 
 
 type props = {

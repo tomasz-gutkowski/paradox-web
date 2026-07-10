@@ -1,8 +1,8 @@
-import type {ArenaModeData, ChampionData, DefaultModeData, IdNameImageData, IdNamePair} from "../../types/ProfileTypes.ts";
+import type {ArenaModeData, ChampionData, DefaultModeData, IdNameImageData, IdNamePair} from "../../../utilities/ProfileTypes.ts";
 import MatchPlayerInventory from "./MatchPlayerInventory.tsx";
-import DefaultModeScoreboard from "./DefaultModeScoreboard.tsx";
-import ArenaModeScoreboard from "./ArenaModeScoreboard.tsx";
-import {getChampionIconUrl} from "../../../constants.ts";
+import ModeSpecificDataDefault from "../default/ModeSpecificDataDefault.tsx";
+import ModeSpecificDataArena from "../arena/ModeSpecificDataArena.tsx";
+import {getChampionIconUrl} from "../../../utilities/constants.ts";
 
 type props = {
     championData: ChampionData,
@@ -27,19 +27,19 @@ const styles = {
 
 function MatchPlayerInfo({championData, level, summonerSpells, kills, deaths, assists, items, modeData, gameDuration, version} : props){
 
-    const defaultSb = <DefaultModeScoreboard summonerSpells={summonerSpells}
-                                             kills={kills}
-                                             deaths={deaths}
-                                             assists={assists}
-                                             modeData={modeData as DefaultModeData}
-                                             gameDuration={gameDuration}
-                                             version={version}>
-    </DefaultModeScoreboard>
-    const arenaSb = <ArenaModeScoreboard kills={kills}
-                                         deaths={deaths}
-                                         assists={assists}
-                                         modeData={modeData as ArenaModeData}>
-    </ArenaModeScoreboard>;
+    const defaultSb = <ModeSpecificDataDefault summonerSpells={summonerSpells}
+                                               kills={kills}
+                                               deaths={deaths}
+                                               assists={assists}
+                                               modeData={modeData as DefaultModeData}
+                                               gameDuration={gameDuration}
+                                               version={version}>
+    </ModeSpecificDataDefault>
+    const arenaSb = <ModeSpecificDataArena kills={kills}
+                                           deaths={deaths}
+                                           assists={assists}
+                                           modeData={modeData as ArenaModeData}>
+    </ModeSpecificDataArena>;
 
     const displayType = "teamPlacement" in modeData ? arenaSb : defaultSb;
 

@@ -1,5 +1,5 @@
-import type {IdNamePair} from "../../types/ProfileTypes.ts";
-import {getItemIconUrl} from "../../../constants.ts";
+import type {IdNamePair} from "../../../utilities/ProfileTypes.ts";
+import {getItemIconUrl} from "../../../utilities/constants.ts";
 
 const styles = {
     items: "my-8 flex items-start justify-start",

@@ -1,5 +1,5 @@
-import type {ParticipantDisplayInfo} from "../../types/ProfileTypes.ts";
-import {getChampionIconUrl} from "../../../constants.ts";
+import type {ParticipantDisplayInfo} from "../../../utilities/ProfileTypes.ts";
+import {getChampionIconUrl} from "../../../utilities/constants.ts";
 
 type props = {
     ownerName: string,

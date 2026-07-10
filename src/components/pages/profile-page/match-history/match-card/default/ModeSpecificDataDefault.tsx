@@ -1,5 +1,5 @@
-import type {DefaultModeData, IdNameImageData} from "../../types/ProfileTypes.ts";
-import {getPerkIconUrl, getSummonerSpellIconUrl} from "../../../constants.ts";
+import type {DefaultModeData, IdNameImageData} from "../../../utilities/ProfileTypes.ts";
+import {getPerkIconUrl, getSummonerSpellIconUrl} from "../../../utilities/constants.ts";
 
 type props = {
     summonerSpells: IdNameImageData[],
@@ -21,7 +21,7 @@ const styles = {
     kdaRatio: "text-xs text-graphite-900",
     creepScore: "text-xs text-graphite-900 pt-1 border-t",
 }
-function DefaultModeScoreboard({summonerSpells, kills, deaths, assists, modeData, gameDuration, version} : props){
+function ModeSpecificDataDefault({summonerSpells, kills, deaths, assists, modeData, gameDuration, version} : props){
 
     const summonerSpellsDisplay = summonerSpells.map((s, index) =>
         <img key={index+"-"+s.id} className={styles.icon} src={getSummonerSpellIconUrl(version, s.image)} alt={s.name}></img>)
@@ -60,4 +60,4 @@ function DefaultModeScoreboard({summonerSpells, kills, deaths, assists, modeData
 }
 
 
-export default DefaultModeScoreboard;
+export default ModeSpecificDataDefault;

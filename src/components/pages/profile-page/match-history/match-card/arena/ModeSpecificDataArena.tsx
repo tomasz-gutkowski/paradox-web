@@ -1,5 +1,5 @@
-import type {ArenaModeData} from "../../types/ProfileTypes.ts";
-import {getAugmentIconUrl} from "../../../constants.ts";
+import type {ArenaModeData} from "../../../utilities/ProfileTypes.ts";
+import {getAugmentIconUrl} from "../../../utilities/constants.ts";
 
 type props = {
     kills: number,
@@ -16,7 +16,7 @@ const styles = {
     kda : "text-base text-graphite-900 px-1 py-0 flex flex-row tracking-widest border-b-1",
     kdaRatio: "mt-1 text-xs text-graphite-900",
 }
-function ArenaModeScoreboard({kills, deaths, assists, modeData}: props) {
+function ModeSpecificDataArena({kills, deaths, assists, modeData}: props) {
 
     const augmentsDisplay = modeData.augments.map((a, index) => {
             if(a.id > 0){
@@ -47,4 +47,4 @@ function ArenaModeScoreboard({kills, deaths, assists, modeData}: props) {
     </div>)
 }
 
-export default ArenaModeScoreboard;
+export default ModeSpecificDataArena;
