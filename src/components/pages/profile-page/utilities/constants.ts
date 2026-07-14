@@ -1,4 +1,6 @@
 //backend_url
+import type {DefaultModeData, ParticipantDisplayInfo, PlayerDisplayInfo} from "./ProfileTypes.ts";
+
 export const BACKEND_URL: string = import.meta.env.VITE_BACKEND_URL;
 
 //backend calls
@@ -31,3 +33,20 @@ export const getPerkIconUrl = (perkImage : string) : string =>
 
 export const getAugmentIconUrl = (augmentIcon : string) : string =>
     (`https://raw.communitydragon.org/latest/game/${augmentIcon}`);
+
+//sorting by position
+export function sortByRoleParticipant(p1:ParticipantDisplayInfo , p2:ParticipantDisplayInfo){
+    return POSITION_ORDER[p1.position] - POSITION_ORDER[p2.position];
+}
+
+export function sortByRolePlayer(p1:PlayerDisplayInfo, p2:PlayerDisplayInfo){
+    return POSITION_ORDER[(p1.modeData as DefaultModeData).position] - POSITION_ORDER[(p2.modeData as DefaultModeData).position];
+}
+
+const POSITION_ORDER: Record<string, number> = {
+    TOP: 0,
+    JUNGLE: 1,
+    MIDDLE: 2,
+    BOTTOM: 3,
+    UTILITY: 4,
+};

@@ -1,5 +1,6 @@
 import type {ParticipantDisplayInfo} from "../../../utilities/ProfileTypes.ts";
 import {getChampionIconUrl} from "../../../utilities/constants.ts";
+import {sortByRoleParticipant} from "../../../utilities/constants.ts";
 
 type props = {
     ownerName: string,
@@ -22,12 +23,10 @@ function MatchPlayersListDefault({ownerName, ownerTag, participants, version} : 
 
     participants.forEach(p => p.teamId === 100 ? blue.push(p) : red.push(p));
 
-    function sortByRole(p1:ParticipantDisplayInfo , p2:ParticipantDisplayInfo){
-        return POSITION_ORDER[p1.position] - POSITION_ORDER[p2.position];
-    }
 
-    blue.sort((p1,p2) => sortByRole(p1,p2));
-    red.sort((p1,p2) => sortByRole(p1,p2));
+
+    blue.sort((p1,p2) => sortByRoleParticipant(p1,p2));
+    red.sort((p1,p2) => sortByRoleParticipant(p1,p2));
 
 
 
@@ -55,13 +54,5 @@ function MatchPlayersListDefault({ownerName, ownerTag, participants, version} : 
         </div>
     </div>)
 }
-
-const POSITION_ORDER: Record<string, number> = {
-    TOP: 0,
-    JUNGLE: 1,
-    MIDDLE: 2,
-    BOTTOM: 3,
-    UTILITY: 4,
-};
 
 export default MatchPlayersListDefault;

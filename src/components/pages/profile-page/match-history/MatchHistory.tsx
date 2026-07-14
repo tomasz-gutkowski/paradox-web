@@ -21,21 +21,28 @@ function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props
     const [matches, setMatches] = useState<MatchInfo[]>(matchData)
     const [start, setStart] = useState<number>(20)
     const [loading, setLoading] = useState<boolean>(false)
+    const [buttonEnabled, setButtonEnabled] = useState<boolean>(true)
+
 
     const matchesDisplay = matches.map(m => <MatchCard key={m.matchId} serverTag={serverTag} matchData={m} version={version}></MatchCard>);
 
     async function loadMoreMatches() {
         setLoading(true)
         const matchesRes : MatchInfo[] = await fetch(fetchMatchListUrl(serverTag, puuid, anchorTime)+"?start="+start).then((res) => res.json());
+        if(matchesRes.length < 20) setButtonEnabled(false);
         setMatches([...matches, ...matchesRes]);
         setStart(start + matchesRes.length);
         setLoading(false)
     }
 
+    const expandButton = buttonEnabled ?
+        (<button className={styles.expandButton} onClick={() => loadMoreMatches()}>{loading ? "LOADING..." : "MORE" }</button>) :
+        <div className={"my-4"}></div>;
+
     return (
         <div className={styles.component}>
             {matchesDisplay}
-            <button className={styles.expandButton} onClick={() => loadMoreMatches()}>{loading ? "LOADING..." : "MORE" }</button>
+            {expandButton}
         </div>
     )
 }

@@ -5,18 +5,20 @@ import MatchPlayersListDefault from "./default/MatchPlayersListDefault.tsx";
 import MatchPlayersListArena from "./arena/MatchPlayersListArena.tsx";
 import {useState} from "react";
 import {fetchMatchDetailsUrl} from "../../utilities/constants.ts";
+import MatchExpandedDetailsDefault from "../match-expanded/MatchExpandedDetailsDefault.tsx";
 
 const styles = {
     win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
     loss: "bg-rosewood-600 hover:bg-rosewood-700 border-brick-red-700 text-brick-red-800",
     remake: "bg-graphite-700 hover:bg-graphite-600 border-graphite-800 text-graphite-900",
-    error: "bg-graphite-100 border-graphite-100 text-graphite-100",
-    shared: "w-200 h-40 border-y-0 border-x-10 border-solid font-default-bold p-2 mt-8 flex flex-row"
+    notDefined: "bg-graphite-100 border-graphite-100 text-graphite-100",
+    shared: "w-200 h-40 border-y-0 border-x-10 border-solid font-default-bold p-2 mt-8 flex flex-row cursor-pointer"
 };
 
 function MatchCard({serverTag, matchData, version} : {serverTag : string, matchData : MatchInfo, version: string}){
     const [expanded, setExpanded] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [matchDetails, setMatchDetails] = useState<MatchDetails>();
 
     let style : string;
@@ -25,13 +27,14 @@ function MatchCard({serverTag, matchData, version} : {serverTag : string, matchD
         case "WIN":{ style = styles.win; break;}
         case "LOSS":{ style = styles.loss; break;}
         case "REMAKE":{ style = styles.remake; break;}
-        default: {style = styles.error; break;}
+        default: {style = styles.notDefined; break;}
     }
 
     style = style + " " + styles.shared;
 
     let gameResult;
     let teamPlacement;
+
 
     if("win" in matchData.player.modeData) gameResult = matchData.gameResult;
     else if("teamPlacement" in  matchData.player.modeData) teamPlacement = matchData.player.modeData.teamPlacement;
@@ -44,19 +47,45 @@ function MatchCard({serverTag, matchData, version} : {serverTag : string, matchD
                                                      ownerTag={matchData.player.tagline}
                                                      participants={matchData.participants}
                                                      version={version}/>
-    const playerList = gameResult === undefined ? arenaPlayerList : defaultPlayerList;
 
-    const expandedDisplay = expanded ? <div className={"width-200 h-4 bg-green-500"}>{loading ? "LOADING..." : "LOADED"}</div> : <div className={"width-200 h-2 bg-red-500"}></div>
+    const isDefaultDisplay = gameResult !== undefined;
+
+    const playerList = isDefaultDisplay ? defaultPlayerList : arenaPlayerList;
+
+
+    const loadingDisplay = <div className={"width-200 h-126 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl font-default-bold text-graphite-900"}>⏳</div>
+
+    const errorDisplay = <div className={"width-200 h-126 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center font-default-bold text-brick-red-600 text-8xl"}>❌</div>
+
+    const expandedDisplay = matchDetails && (isDefaultDisplay ?
+        <MatchExpandedDetailsDefault version={version}
+                                     matchDetails={matchDetails}
+                                     gameDuration={matchData.gameDuration}
+                                     ownerGameName={matchData.player.gameName}
+                                     ownerTagLine={matchData.player.tagline}>
+        </MatchExpandedDetailsDefault> :
+        <div>arena</div>)
 
     async function expandDetails(){
+        setError(false);
         setExpanded(!expanded);
         if(!expanded && matchDetails === undefined) {
-            setLoading(true);
-            const matchDetailsRes = await fetch(fetchMatchDetailsUrl(serverTag, matchData.matchId)).then(res => res.json())
+            try{
+                setLoading(true);
+                const matchDetailsRes: Response = await fetch(fetchMatchDetailsUrl(serverTag, matchData.matchId))
+                if (!matchDetailsRes.ok) throw new Error();
 
-            setMatchDetails(matchDetailsRes);
-            setLoading(false);
+                const matchDetails: MatchDetails = await matchDetailsRes.json();
+                setMatchDetails(matchDetails);
+            }catch(e){
+                setError(true)
+                console.error(e);
+            }
+            finally {
+                setLoading(false);
+            }
         }
+
     }
 
     return(
@@ -80,7 +109,13 @@ function MatchCard({serverTag, matchData, version} : {serverTag : string, matchD
                              version={version}/>
             {playerList}
         </div>
-            {expandedDisplay}
+            {expanded && (
+                <div>
+                    {loading && loadingDisplay}
+                    {error && errorDisplay}
+                    {!loading && !error && expandedDisplay}
+                </div>
+            ) }
         </div>
     );
 }
