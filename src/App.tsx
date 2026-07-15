@@ -11,6 +11,7 @@ const router = createBrowserRouter([
         path: "/profile/:server/:gameName/:tagLine",
         element: <ProfilePage/>,
         loader: profileLoader,
+        //hydrateFallbackElement:
     },
     {
        path: "/home",

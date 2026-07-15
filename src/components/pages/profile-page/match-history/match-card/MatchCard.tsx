@@ -5,7 +5,8 @@ import MatchPlayersListDefault from "./default/MatchPlayersListDefault.tsx";
 import MatchPlayersListArena from "./arena/MatchPlayersListArena.tsx";
 import {useState} from "react";
 import {fetchMatchDetailsUrl} from "../../utilities/constants.ts";
-import MatchExpandedDetailsDefault from "../match-expanded/MatchExpandedDetailsDefault.tsx";
+import MatchExpandedDefault from "../match-expanded/default/MatchExpandedDefault.tsx";
+import MatchExpandedArena from "../match-expanded/arena/MatchExpandedArena.tsx";
 
 const styles = {
     win:"bg-glaucous-600 hover:bg-glaucous-700 border-steel-blue-500 text-steel-blue-700",
@@ -53,18 +54,21 @@ function MatchCard({serverTag, matchData, version} : {serverTag : string, matchD
     const playerList = isDefaultDisplay ? defaultPlayerList : arenaPlayerList;
 
 
-    const loadingDisplay = <div className={"width-200 h-126 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl font-default-bold text-graphite-900"}>⏳</div>
+    const loadingDisplay = <div className={"width-200 h-128 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl "}>⏳</div>
 
-    const errorDisplay = <div className={"width-200 h-126 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center font-default-bold text-brick-red-600 text-8xl"}>❌</div>
+    const errorDisplay = <div className={"width-200 h-128 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl"}>❌</div>
 
     const expandedDisplay = matchDetails && (isDefaultDisplay ?
-        <MatchExpandedDetailsDefault version={version}
-                                     matchDetails={matchDetails}
-                                     gameDuration={matchData.gameDuration}
-                                     ownerGameName={matchData.player.gameName}
-                                     ownerTagLine={matchData.player.tagline}>
-        </MatchExpandedDetailsDefault> :
-        <div>arena</div>)
+        <MatchExpandedDefault version={version}
+                              matchDetails={matchDetails}
+                              gameDuration={matchData.gameDuration}
+                              ownerGameName={matchData.player.gameName}
+                              ownerTagLine={matchData.player.tagline}>
+        </MatchExpandedDefault> :
+        <MatchExpandedArena
+        version={version}
+        matchDetails={matchDetails}>
+        </MatchExpandedArena>)
 
     async function expandDetails(){
         setError(false);

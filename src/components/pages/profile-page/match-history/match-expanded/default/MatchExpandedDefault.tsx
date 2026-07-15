@@ -1,6 +1,6 @@
-import type {DefaultModeData, MatchDetails} from "../../utilities/ProfileTypes.ts";
-import DetailsPlayerCell from "./DetailsPlayerCell.tsx";
-import {sortByRolePlayer} from "../../utilities/constants.ts";
+import type {DefaultModeData, MatchDetails} from "../../../utilities/ProfileTypes.ts";
+import ExpandedPlayerCellDefault from "./ExpandedPlayerCellDefault.tsx";
+import {sortByRolePlayer} from "../../../utilities/constants.ts";
 
 type props = {
     version: string,
@@ -11,10 +11,10 @@ type props = {
 }
 
 const styles = {
-    component: "bg-graphite-600 width-200 rounded-b-xl pb-2",
+    component: "bg-graphite-600 width-200 rounded-b-xl pb-2.5",
     legend: "flex flex-row bg-graphite-600 font-default-bold text-graphite-900 h-6",
 }
-function MatchExpandedDetailsDefault({version, matchDetails, gameDuration, ownerGameName, ownerTagLine} : props) {
+function MatchExpandedDefault({version, matchDetails, gameDuration, ownerGameName, ownerTagLine} : props) {
     const sortedPlayers = matchDetails.players.sort((p1, p2) =>
         sortByRolePlayer(p1, p2))
         .sort((p1, p2) =>
@@ -29,13 +29,12 @@ function MatchExpandedDetailsDefault({version, matchDetails, gameDuration, owner
         .map(p => p.totalDamageDealtToChampions))
 
     const playerCells = sortedPlayers.map(p =>
-        (<DetailsPlayerCell key={`${p.gameName}#${p.tagline}`}
-                            playerDisplayInfo={p}
-                            version={version}
-                            gameDuration={gameDuration}
-                            maxTeamDamage={(p.modeData as DefaultModeData).side.toUpperCase() === "BLUE" ? maxDmgBlue : maxDmgRed}
-                            ownerGameName={ownerGameName}
-                            ownerTagLine={ownerTagLine}
+        (<ExpandedPlayerCellDefault key={`${p.gameName}#${p.tagline}`}
+                                    playerDisplayInfo={p}
+                                    version={version}
+                                    gameDuration={gameDuration}
+                                    maxTeamDamage={(p.modeData as DefaultModeData).side.toUpperCase() === "BLUE" ? maxDmgBlue : maxDmgRed}
+                                    isOwner={p.gameName === ownerGameName && ownerTagLine === ownerTagLine}
                             />))
     return (
         <div className={styles.component}>
@@ -53,4 +52,4 @@ const sideVal =  (side : string) : number => {
     return side.toUpperCase() === "BLUE" ? 1 : 2;
 }
 
-export default MatchExpandedDetailsDefault;
+export default MatchExpandedDefault;

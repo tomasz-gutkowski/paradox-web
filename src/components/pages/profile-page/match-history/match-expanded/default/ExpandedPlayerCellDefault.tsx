@@ -1,18 +1,17 @@
-import type {DefaultModeData, PlayerDisplayInfo} from "../../utilities/ProfileTypes.ts";
+import type {DefaultModeData, PlayerDisplayInfo} from "../../../utilities/ProfileTypes.ts";
 import {
     getChampionIconUrl,
     getItemIconUrl,
     getPerkIconUrl,
     getSummonerSpellIconUrl
-} from "../../utilities/constants.ts";
+} from "../../../utilities/constants.ts";
 
 type props = {
     playerDisplayInfo: PlayerDisplayInfo,
     version: string,
     gameDuration: number,
     maxTeamDamage: number,
-    ownerGameName: string,
-    ownerTagLine: string
+    isOwner: boolean,
 }
 
 const styles = {
@@ -28,12 +27,12 @@ const styles = {
     items: "flex flex-row px-2 align-middle items-center justify-center",
 }
 
-function DetailsPlayerCell({playerDisplayInfo, version, gameDuration, maxTeamDamage, ownerGameName, ownerTagLine}: props) {
+function ExpandedPlayerCellDefault({playerDisplayInfo, version, gameDuration, maxTeamDamage, isOwner}: props) {
     const modeData = playerDisplayInfo.modeData as DefaultModeData;
 
     const bgColor = modeData.side === "BLUE" ?
-        (ownerGameName === playerDisplayInfo.gameName && ownerTagLine === playerDisplayInfo.tagline ? " bg-glaucous-700": " bg-glaucous-600") :
-        (ownerGameName === playerDisplayInfo.gameName && ownerTagLine === playerDisplayInfo.tagline ? " bg-rosewood-700": " bg-rosewood-600");
+        (isOwner ? " bg-glaucous-700": " bg-glaucous-600") :
+        (isOwner ? " bg-rosewood-700": " bg-rosewood-600");
 
 
     const championIconDisplay = <img className={styles.champIcon} src={getChampionIconUrl(version, playerDisplayInfo.championData.id)} alt={playerDisplayInfo.championData.id}></img>
@@ -94,4 +93,4 @@ function DetailsPlayerCell({playerDisplayInfo, version, gameDuration, maxTeamDam
         </div>
     </div>)
 }
-export default DetailsPlayerCell;
+export default ExpandedPlayerCellDefault;

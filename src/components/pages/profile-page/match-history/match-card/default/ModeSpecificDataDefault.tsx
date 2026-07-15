@@ -54,8 +54,6 @@ function ModeSpecificDataDefault({summonerSpells, kills, deaths, assists, modeDa
                 {creepScoreDisplay}
             </div>
         </div>
-
-
     </div>)
 }
 
