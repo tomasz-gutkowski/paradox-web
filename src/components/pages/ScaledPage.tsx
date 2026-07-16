@@ -5,7 +5,7 @@ interface props{
     designWidth?: number;
     children?: React.ReactNode;
 }
-// Wrapper component
+
 function ScaledPage({ designWidth = 1600, children }: props) {
     const containerRef = useRef<HTMLDivElement>(null);
     const innerRef = useRef<HTMLDivElement>(null);

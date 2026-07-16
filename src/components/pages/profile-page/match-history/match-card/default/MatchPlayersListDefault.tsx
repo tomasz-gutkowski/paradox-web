@@ -24,11 +24,8 @@ function MatchPlayersListDefault({ownerName, ownerTag, participants, version} : 
     participants.forEach(p => p.teamId === 100 ? blue.push(p) : red.push(p));
 
 
-
     blue.sort((p1,p2) => sortByRoleParticipant(p1,p2));
     red.sort((p1,p2) => sortByRoleParticipant(p1,p2));
-
-
 
     function mapPlayer(p : ParticipantDisplayInfo){
         const ownerStyle = (ownerName === p.gameName && ownerTag === p.tagLine) ? "font-bold" : "font-medium";

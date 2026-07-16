@@ -3,9 +3,7 @@ import ExpandedPlayerCellArena from "./ExpandedPlayerCellArena.tsx";
 
 type props = {
     version: string,
-    matchDetails: MatchDetails,
-    ownerGameName: string,
-    ownerTagLine: string
+    matchDetails: MatchDetails
 }
 
 const styles = {

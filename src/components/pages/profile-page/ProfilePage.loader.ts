@@ -9,13 +9,41 @@ export async function profileLoader({params}: LoaderFunctionArgs) {
         throw new Response("Missing required params", {status: 400});
     }
 
-    const profileRes : ProfileResponse = await fetch(fetchProfileUrl(server, gameName, tagLine)).then((res) => res.json());
+    const profileRes: Response = await fetch(fetchProfileUrl(server, gameName, tagLine))
+        .catch(() => {
+            throw new Response("Unable to reach the server", { status: 503 })
+        });
+
+
+    if(!profileRes.ok) throw new Response("Profile data not found", {status: 404});
+
+    const profileJson : ProfileResponse = await profileRes.json();
+
 
     const anchor = Date.now();
 
-    const matchesRes : MatchInfo[] = await fetch(fetchMatchListUrl(server, profileRes.player.puuid, anchor)).then((res) => res.json());
 
-    const versionRes : string = await fetch (fetchDataDragonLatestUrl()).then((res) => res.text());
+    const matchesRes : Response = await fetch(fetchMatchListUrl(server, profileJson.player.puuid, anchor))
+        .catch(() => {
+            throw new Response("Unable to reach the server", { status: 503 })
+        });
 
-    return {profileRes , matchesRes, versionRes, server, anchor};
+    if(!matchesRes.ok) throw new Response("Profile data not found", {status: 404});
+
+
+    const matchesJson : MatchInfo[] = await matchesRes.json();
+
+
+    const versionRes : Response = await fetch (fetchDataDragonLatestUrl())
+        .catch(() => {
+            throw new Response("Unable to reach the server", { status: 503 })
+        });
+
+    if (!versionRes.ok) throw new Response("Profile data not found", {status: 404});
+
+
+    const versionJson : string = await versionRes.text();
+
+
+    return {profileJson , matchesJson, versionJson, server, anchor};
 }

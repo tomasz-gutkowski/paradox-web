@@ -23,7 +23,6 @@ function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props
     const [loading, setLoading] = useState<boolean>(false)
     const [buttonEnabled, setButtonEnabled] = useState<boolean>(true)
 
-
     const matchesDisplay = matches.map(m => <MatchCard key={m.matchId} serverTag={serverTag} matchData={m} version={version}></MatchCard>);
 
     async function loadMoreMatches() {

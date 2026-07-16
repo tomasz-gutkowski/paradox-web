@@ -3,15 +3,21 @@ import ProfileInfo from "./profile-info/ProfileInfo.tsx";
 import MatchHistory from "./match-history/MatchHistory.tsx"
 import type {MatchInfo, ProfileResponse} from "./utilities/ProfileTypes.ts";
 import {useLoaderData} from "react-router-dom";
+import {useEffect} from "react";
 
 function ProfilePage(){
 
-    const {profileRes , matchesRes, versionRes, server, anchor} = useLoaderData();
-    const profileData = profileRes as ProfileResponse;
-    const matchData = matchesRes as MatchInfo[];
-    const version = versionRes as string;
+    const {profileJson , matchesJson, versionJson, server, anchor} = useLoaderData();
+    const profileData = profileJson as ProfileResponse;
+    const matchData = matchesJson as MatchInfo[];
+    const version = versionJson as string;
     const serverTag = server as string;
     const anchorTime = anchor as number;
+
+    useEffect(() => {
+        document.title = `${profileData.player.gameName}#${profileData.player.tagLine}`;
+    }, [profileData.player.gameName, profileData.player.tagLine]);
+
 
     return(
         <>
