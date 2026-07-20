@@ -23,10 +23,17 @@ function ProfilePage(){
         <>
             <PageBlueprint>
                 <div className="w-28/100">
-                    <ProfileInfo profileData={profileData} version={version} />
+                    <ProfileInfo key={`${profileData.player.puuid}`}
+                                profileData={profileData}
+                                version={version} />
                 </div>
                 <div className="flex-1 min-h-dvh">
-                    <MatchHistory matchData={matchData} version={version} puuid={profileData.player.puuid} serverTag={serverTag} anchorTime={anchorTime}/>
+                    <MatchHistory key={`${profileData.player.puuid}_${matchData[0]?.matchId ?? "noMatches"}`}
+                                  matchData={matchData}
+                                  version={version}
+                                  puuid={profileData.player.puuid}
+                                  serverTag={serverTag}
+                                  anchorTime={anchorTime}/>
                 </div>
             </PageBlueprint>
         </>

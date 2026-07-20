@@ -1,35 +1,34 @@
-import HeaderButton from "./HeaderButton.tsx";
-import HeaderTextField from "./HeaderTextField.tsx";
+import HeaderSearchBar from "./HeaderSearchBar";
+
+const styles = {
+    component: "px-10 bg-graphite-200 w-full h-16 flex items-center border-b-3 border-graphite-600",
+    logoType: "w-1/3 flex flex-row items-center",
+    imgBox: "w-20 h-16 bg-graphite-800 items-center flex items-center justify-center",
+    icon: "w-15 h-15 ",
+    title: "px-5 text-2xl font-default-bold text-graphite-800 h-full",
+
+    navIcons: "w-1/3 h-full bg-green-500",
+
+}
+
 
 function Header(){
-    return (
-        <header className="
-        bg-graphite-200
-        text-text-light
-         w-full
-         h-16
-         font-default-light
-         place-content-center
-         flex
-         justify-between
-         items-center
-         pl-10
-         pr-10
-         border-b
-         border-alabaster-grey-400
-         ">
-            <div className="w-3/8 flex items-center justify-start">
-                <HeaderButton title={"HOME"}></HeaderButton>
-                <HeaderButton title={"EXAMPLE"}></HeaderButton>
-            </div >
-            <div className="text-graphite-200 font-default-bold text-2xl w-2/8 flex items-center justify-center bg-alabaster-grey">
-                <img src="/src/assets/webicon.png" className="w-16 h-16"></img><h1>NAZWA STRONY</h1>
-            </div>
-            <div className="w-3/8 flex items-center justify-end">
-                <HeaderButton title={"SEARCH"}></HeaderButton>
-                <HeaderTextField></HeaderTextField>
-            </div>
 
+
+    return (
+        <header className={styles.component}>
+            <div className={styles.logoType}>
+                <div className={styles.imgBox}>
+                    <img src={"/src/assets/webicon.png"} className={styles.icon}></img>
+                </div>
+                <div className={styles.title}>
+                    TEMP.GG
+                </div>
+            </div>
+            <HeaderSearchBar></HeaderSearchBar>
+            <div className={styles.navIcons}>
+
+            </div>
         </header>
     )
 }

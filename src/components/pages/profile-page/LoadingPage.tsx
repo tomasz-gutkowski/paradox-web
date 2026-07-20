@@ -1,8 +1,13 @@
 import PageBlueprint from "../PageBlueprint.tsx";
+import {useEffect} from "react";
 
-document.title = "..."
+
 
 function ProfilePage(){
+    useEffect(()=>{
+        document.title = "...";
+    })
+
     return(
         <>
             <PageBlueprint>
