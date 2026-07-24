@@ -30,7 +30,7 @@ function Header(){
                     <img src={"/src/assets/webicon.png"} className={styles.icon}></img>
                 </div>
                 <div className={styles.title}>
-                    TEMP.GG
+                    PARADOX
                 </div>
                 <button type={"button"}
                         className={styles.homeButton}

@@ -14,7 +14,7 @@ type props = {
 
 const styles = {
     component: "flex flex-col items-center justify-start",
-    expandButton: "my-6 w-200 h-16 text-3xl font-bold tracking-wide text-graphite-800 bg-graphite-300 border-x-10 hover:bg-graphite-500",
+    expandButton: "flex items-center justify-center my-6 w-200 h-16 text-3xl font-bold tracking-wide text-graphite-800 bg-graphite-300 border-x-10 hover:bg-graphite-500",
 }
 
 function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props) {
@@ -34,8 +34,13 @@ function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props
         setLoading(false)
     }
 
+    const buttonText = loading ? <div className={"h-14 w-14 animate-spin rounded-full border-8 border-graphite-400 border-r-graphite-800"}></div> :
+        <div>MORE</div>
+
     const expandButton = buttonEnabled ?
-        (<button className={styles.expandButton} onClick={() => loadMoreMatches()}>{loading ? "LOADING..." : "MORE" }</button>) :
+        (<button className={styles.expandButton} onClick={() => loadMoreMatches()}>
+            {buttonText}
+        </button>) :
         <div className={"my-4"}></div>;
 
     return (
