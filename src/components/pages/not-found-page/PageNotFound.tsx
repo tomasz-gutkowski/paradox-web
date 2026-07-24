@@ -11,7 +11,6 @@ const styles = {
 function PageNotFound(){
     const error = useRouteError();
 
-
     useEffect(() => {
         document.title = isRouteErrorResponse(error) ? (error.status).toString() : "404";
         }, [error]);

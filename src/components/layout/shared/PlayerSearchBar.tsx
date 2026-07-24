@@ -21,7 +21,7 @@ function PlayerSearchBar({searchBarType}: props) {
             component: "border-3 bg-graphite-200 text-graphite-800 flex items-center justify-center text-3xl",
             searchButton: "p-2 font-default-light text-graphite-800 font-bold hover:bg-graphite-500 cursor-pointer",
             nameInput: "w-130 field-sizing-fixed h-11 border-x-2 align-middle px-2 py-1 bg-graphite-200 focus:outline-0 font-default-light text-graphite-800 font-bold",
-            invalidName: "h-11 border-x-2 align-middle px-2 py-1 bg-rosewood-800 focus:outline-0 font-default-light text-graphite-800 font-bold",
+            invalidName: "bg-rosewood-800",
             serverSelect: "h-full p-2 items-center align-middle px-2 appearance-none bg-graphite-200 focus:outline-0 border-0 text-graphite-800 font-bold hover:bg-graphite-500 cursor-pointer",
             loadingIcon: "h-11 w-11 animate-spin rounded-full border-7 border-graphite-400 border-r-graphite-800",
             searchIcon: "h-11 w-11",
@@ -83,7 +83,7 @@ function PlayerSearchBar({searchBarType}: props) {
                     {searchButtonIcon}
                 </button>
                 <input id={nameInputId}
-                       className={invalidName ? styles.invalidName : styles.nameInput}
+                       className={invalidName ? styles.nameInput+" "+styles.invalidName : styles.nameInput}
                        type={"text"}>
                 </input>
                 <select defaultValue={server}
