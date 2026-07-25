@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import {createBrowserRouter, redirect, RouterProvider} from 'react-router-dom'
 import HomePage from "./components/pages/home-page/HomePage.tsx";
 import ProfilePage from "./components/pages/profile-page/ProfilePage.tsx";
 import {profileLoader} from "./components/pages/profile-page/ProfilePage.loader.ts";
@@ -8,6 +8,10 @@ import LoadingPage from "./components/pages/profile-page/LoadingPage.tsx";
 
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        loader: () => redirect("/home")
+    },
     {
         path: "/profile/:server/:gameName/:tagLine",
         element: <ProfilePage/>,
