@@ -15,7 +15,7 @@ function HomePage(){
     return(
         <PageBlueprint>
             <div className={styles.component}>
-                <img src={"../../../src/assets/webicon.png"} className={"w-76 h-76"}></img>
+                <img src={"/webicon.png"} className={"w-76 h-76"} alt={"PARADOX"}></img>
                 <div className={styles.title}>PARADOX</div>
                 <PlayerSearchBar searchBarType={"main"}/>
             </div>

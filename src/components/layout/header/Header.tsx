@@ -16,7 +16,7 @@ const styles = {
 
 
 function Header(){
-    const homeButtonIcon = <img className={styles.homeIcon} src={"/src/assets/homeicon.png"} alt={""}></img>;
+    const homeButtonIcon = <img className={styles.homeIcon} src={"/homeicon.png"} alt={""}></img>;
     const navigate = useNavigate();
 
     const navigateHome = () => {
@@ -27,7 +27,7 @@ function Header(){
         <header className={styles.component}>
             <div className={styles.logoType}>
                 <div className={styles.imgBox}>
-                    <img src={"/src/assets/webicon.png"} className={styles.icon}></img>
+                    <img src={"/webicon.png"} className={styles.icon} alt={"PARADOX"}></img>
                 </div>
                 <div className={styles.title}>
                     PARADOX

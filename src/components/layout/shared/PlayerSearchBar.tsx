@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useNavigation} from "react-router-dom";
+import * as React from "react";
 
 type props = {
     searchBarType: "header" | "main",
@@ -53,7 +54,7 @@ function PlayerSearchBar({searchBarType}: props) {
 
     const searchButtonIcon = loading ?
         <div className={styles.loadingIcon}/> :
-        <img className={styles.searchIcon} src={"/src/assets/searchIcon.png"} alt={""}></img>;
+        <img className={styles.searchIcon} src={"/searchicon.png"} alt={""}></img>;
 
     function handleSubmit() {
         const fullGameName = (document.getElementById(nameInputId) as HTMLInputElement).value;

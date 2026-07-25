@@ -20,7 +20,7 @@ const styles = {
 
 function RankedCard({queueType, tier, rank, leaguePoints, wins, losses}: Props) {
     const queueName = getQueueDisplayName(queueType);
-    const tierIconPath = "/src/assets/tier-icons/" + tier.toLowerCase() + ".png";
+    const tierIconPath = "/tier-icons/" + tier.toLowerCase() + ".png";
     const fullRankName = tier + " " +(tier === "UNRANKED" || tier === "MASTER" || tier ==="GRANDMASTER" || tier === "CHALLENGER" ? "" : rank);
     const winRatio = ((wins / (wins+losses)*100).toFixed(0)).toString() + "%WR";
     return (
