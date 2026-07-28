@@ -54,7 +54,9 @@ function MatchCard({serverTag, matchData, version} : {serverTag : string, matchD
     const playerList = isDefaultDisplay ? defaultPlayerList : arenaPlayerList;
 
 
-    const loadingDisplay = <div className={"width-200 h-128 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl "}>⏳</div>
+    const loadingDisplay = <div className={"width-200 h-128 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl "}>
+                                        <div className={"h-20 w-20 animate-spin rounded-full border-12 border-graphite-400 border-r-graphite-800"}></div>
+                                    </div>
 
     const errorDisplay = <div className={"width-200 h-128 rounded-b-xl pb-2 bg-graphite-600 flex items-center justify-center text-8xl"}>❌</div>
 

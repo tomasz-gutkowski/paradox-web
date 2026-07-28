@@ -108,3 +108,10 @@ export type AugmentData = {
     iconSmall : string,
 }
 
+export type ApiErrorResponse = {
+    status: number;
+    message: string;
+    path: string;
+    timestamp: string;
+}
+
