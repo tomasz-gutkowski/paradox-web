@@ -52,8 +52,9 @@ function ExpandedPlayerCellArena({playerDisplayInfo, version, maxTeamDamage, isI
 
     const itemAmmount = 6;
 
-    const augmentsDisplay = modeData.augments.sort(a1 => a1.id >= 0 ? -1 : 1)
-        .map((a, index) => a.id > 0 ?
+    const augmentsSorted = modeData.augments.sort((a1) => a1.id >= 0 ? -1 : 1)
+
+    const augmentsDisplay = augmentsSorted.map((a, index) => a.id > 0 ?
     <img key={`${index}_${a.id}`} className={"w-7 h-7 border border-graphite-200 bg-graphite-200"} src={getAugmentIconUrl(a.iconSmall)} alt={a.name}></img> :
     <div key={`${index}_empty`} className={"w-7 h-7 bg-graphite-200"}></div>);
 
