@@ -9,34 +9,6 @@ html{
     overflow-y: scroll;
 }
 
-@theme{
-    --color-red-dark: #880718;
-    --color-red-default: #AE091F;
-    --color-red-light: #E90C2A;
-
-    --color-blue-dark: #1E4971;
-    --color-blue-default: #2B68A1;
-    --color-blue-light: #3E87CC;
-
-
-    --color-grey-dark: #1E1F1F;
-    --color-grey-default: #323434;
-    --color-grey-light: #3C3E3E;
-
-    --color-layout-dark: #141414;
-    --color-layout-default: #141414;
-    --color-layout-light: #E0E0E0;
-
-    --color-bg-dark: #1c384c;
-    --color-bg-default: #141414;
-    --color-bg-light: #3E4751;
-
-
-
-
-
-}
-
 @font-face {
     font-family: "InterBold";
     /*noinspection CssUnknownTarget*/
@@ -58,15 +30,15 @@ html{
 @theme {
     /* Graphite */
     --color-graphite-100: #090909;
-    --color-graphite-200: #121313; /*Header.bg, Footer.bg, Logo.text, ProfileCard.cardStyle.bg*/
+    --color-graphite-200: #121313;
     --color-graphite-300: #1b1c1c;
-    --color-graphite-400: #242525; /*MainContent.bg, ProfileCard.labelStyle.bg*/
+    --color-graphite-400: #242525;
     --color-graphite-500: #2e2f2f;
-    --color-graphite-600: #575959; /*hover: HeaderButton.bg*/
+    --color-graphite-600: #575959;
     --color-graphite-700: #808383;
-    --color-graphite-800: #abacac; /*ProfileCard.labelStyle.bg*/
+    --color-graphite-800: #abacac;
     --color-graphite-900: #d5d6d6;
-    --color-graphite: #2e2f2f; /*HeaderButton.bg*/
+    --color-graphite: #2e2f2f;
 
     /* Brick Red */
     --color-brick-red-100: #260207;
@@ -108,7 +80,7 @@ html{
     --color-alabaster-grey-100: #2c2c2b;
     --color-alabaster-grey-200: #585856;
     --color-alabaster-grey-300: #838381;
-    --color-alabaster-grey-400: #aeaead; /*Header.border, Footer.border*, ProfileCard.labelStyle.border, ProfileCard.imgStyle.border*/
+    --color-alabaster-grey-400: #aeaead;
     --color-alabaster-grey-500: #dadad9;
     --color-alabaster-grey-600: #e1e1e0;
     --color-alabaster-grey-700: #e8e8e8;
