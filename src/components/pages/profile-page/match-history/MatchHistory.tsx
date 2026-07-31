@@ -16,10 +16,11 @@ const styles = {
     component: "flex flex-col items-center justify-start",
     expandButton: "flex items-center justify-center my-6 w-200 h-16 text-3xl font-bold tracking-wide text-graphite-800 bg-graphite-300 border-x-10 hover:bg-graphite-500",
 }
+const fetchCount = 10;
 
 function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props) {
     const [matches, setMatches] = useState<MatchInfo[]>(matchData)
-    const [start, setStart] = useState<number>(20)
+    const [start, setStart] = useState<number>(fetchCount)
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<string>()
     const [buttonEnabled, setButtonEnabled] = useState<boolean>(true)
@@ -27,10 +28,9 @@ function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props
     const matchesDisplay = matches.map(m => <MatchCard key={m.matchId} serverTag={serverTag} matchData={m} version={version}></MatchCard>);
 
     async function loadMoreMatches() {
-        const count = 10;
         setError(undefined);
         setLoading(true);
-        const matchesRes: Response = await fetch(fetchMatchListUrl(serverTag, puuid, anchorTime)+"?count="+count+"&start="+start);
+        const matchesRes: Response = await fetch(fetchMatchListUrl(serverTag, puuid, anchorTime)+"?count="+fetchCount+"&start="+start);
 
         const matchesJson : ApiErrorResponse | MatchInfo[] = await matchesRes.json();
 
@@ -41,9 +41,9 @@ function MatchHistory({matchData, version, puuid, serverTag, anchorTime} : props
         else {
             const newMatches: MatchInfo[] = (matchesJson as MatchInfo[]);
 
-            if (newMatches.length < count) setButtonEnabled(false);
-            setMatches([...matches, ...newMatches]);
-            setStart(start + newMatches.length);
+            if (newMatches.length < fetchCount) setButtonEnabled(false);
+            setMatches(prev => [...prev, ...newMatches]);
+            setStart(prev => prev + newMatches.length);
             setLoading(false)
         }
 
